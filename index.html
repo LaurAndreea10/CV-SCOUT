@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CV Scout — Laura Andreea</title>
+  <meta name="description" content="CV Scout este o aplicație front-end pentru analiză CV, scoring automat, feedback structurat și recomandări clare de îmbunătățire." />
+  <meta name="author" content="Laura Andreea" />
+  <meta name="theme-color" content="#07111f" />
+  <style>
+    :root{
+      --bg:#07111f;
+      --bg-2:#0d1b2e;
+      --card:rgba(255,255,255,.08);
+      --card-2:rgba(255,255,255,.12);
+      --text:#f5f8ff;
+      --muted:#aebbd0;
+      --line:rgba(255,255,255,.16);
+      --accent:#7dd3fc;
+      --accent-2:#a78bfa;
+      --good:#86efac;
+      --warn:#fde68a;
+      --danger:#fca5a5;
+      --shadow:0 28px 80px rgba(0,0,0,.38);
+      --radius:28px;
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;min-height:100vh;background:
+      radial-gradient(circle at top left,rgba(125,211,252,.22),transparent 36%),
+      radial-gradient(circle at 80% 20%,rgba(167,139,250,.20),transparent 34%),
+      linear-gradient(135deg,var(--bg),#050915 70%);color:var(--text)}
+    a{color:inherit}
+    .wrap{width:min(1120px,calc(100% - 32px));margin:auto;padding:32px 0 52px}
+    .nav{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:54px}
+    .brand{display:flex;align-items:center;gap:12px;text-decoration:none;font-weight:900;letter-spacing:.04em}
+    .mark{width:44px;height:44px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#06101e;box-shadow:0 16px 40px rgba(125,211,252,.24)}
+    .pill{border:1px solid var(--line);background:rgba(255,255,255,.06);padding:10px 14px;border-radius:999px;text-decoration:none;color:var(--muted);font-weight:700;font-size:.92rem}
+    .hero{display:grid;grid-template-columns:1.08fr .92fr;gap:26px;align-items:stretch}
+    .panel{border:1px solid var(--line);background:linear-gradient(180deg,var(--card),rgba(255,255,255,.045));border-radius:var(--radius);box-shadow:var(--shadow);backdrop-filter:blur(18px)}
+    .copy{padding:38px}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(125,211,252,.28);background:rgba(125,211,252,.10);color:#c8f2ff;padding:8px 12px;border-radius:999px;font-size:.84rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+    h1{font-size:clamp(2.4rem,7vw,5.4rem);line-height:.92;margin:22px 0 18px;letter-spacing:-.08em}
+    .lead{font-size:clamp(1rem,2.2vw,1.22rem);line-height:1.8;color:var(--muted);max-width:64ch}
+    .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 18px;border-radius:16px;border:1px solid var(--line);text-decoration:none;font-weight:900}
+    .btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#06101e;border:0}
+    .btn.secondary{background:rgba(255,255,255,.07);color:var(--text)}
+    .score{padding:26px;display:flex;flex-direction:column;gap:18px}
+    .score-card{padding:24px;border-radius:22px;background:#06101d;border:1px solid var(--line);position:relative;overflow:hidden}
+    .score-card::before{content:"";position:absolute;inset:auto -20% -60% -20%;height:180px;background:radial-gradient(circle,rgba(125,211,252,.22),transparent 62%)}
+    .score-num{font-size:5.6rem;font-weight:1000;letter-spacing:-.08em;line-height:1;color:var(--accent)}
+    .score-label{color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.12em;font-size:.78rem}
+    .meter{height:12px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden;margin-top:16px}
+    .meter span{display:block;height:100%;width:86%;background:linear-gradient(90deg,var(--good),var(--accent),var(--accent-2));border-radius:inherit}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+    .mini{padding:18px;border-radius:20px;background:rgba(255,255,255,.06);border:1px solid var(--line)}
+    .mini strong{display:block;font-size:1.45rem;margin-bottom:6px}
+    .mini span{color:var(--muted);font-size:.92rem;line-height:1.5}
+    .section{margin-top:28px;padding:28px}
+    .section h2{font-size:clamp(1.6rem,4vw,2.5rem);margin:0 0 10px;letter-spacing:-.04em}
+    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
+    .feature{padding:20px;border-radius:22px;background:rgba(255,255,255,.055);border:1px solid var(--line)}
+    .feature b{display:block;margin-bottom:8px;color:#eaf7ff}
+    .feature p{margin:0;color:var(--muted);line-height:1.65}
+    .demo{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:20px}
+    textarea{width:100%;min-height:210px;resize:vertical;border:1px solid var(--line);background:rgba(0,0,0,.28);color:var(--text);border-radius:20px;padding:16px;font:inherit;line-height:1.6;outline:none}
+    textarea:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(125,211,252,.16)}
+    .result{padding:18px;border-radius:20px;background:rgba(0,0,0,.26);border:1px solid var(--line)}
+    .result ul{margin:12px 0 0;padding-left:20px;color:var(--muted);line-height:1.75}
+    .footer{margin-top:30px;color:var(--muted);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.94rem}
+    @media (max-width:860px){.hero,.demo{grid-template-columns:1fr}.grid,.features{grid-template-columns:1fr}.copy{padding:26px}.nav{align-items:flex-start}.score-num{font-size:4.4rem}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav" aria-label="Navigare principală">
+      <a class="brand" href="#top"><span class="mark">CV</span><span>CV Scout</span></a>
+      <a class="pill" href="https://laurandreea10.github.io/codepen-portfolio/">← Portofoliu</a>
+    </nav>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="title">
+        <article class="panel copy">
+          <span class="eyebrow">AI-native CV review · Front-end demo</span>
+          <h1 id="title">Scanează un CV și transformă feedback-ul în acțiuni clare.</h1>
+          <p class="lead">CV Scout este un demo de produs pentru analiză CV: scor rapid, zone de risc, recomandări de structură și sugestii pentru un profil mai clar, mai credibil și mai ușor de parcurs de recrutori.</p>
+          <div class="actions">
+            <a class="btn primary" href="#demo">Testează demo-ul</a>
+            <a class="btn secondary" href="https://github.com/LaurAndreea10/CV-SCOUT">GitHub repo →</a>
+          </div>
+        </article>
+        <aside class="panel score" aria-label="Preview scor CV">
+          <div class="score-card">
+            <div class="score-label">CV readiness score</div>
+            <div class="score-num" id="score">86</div>
+            <div class="meter"><span id="meter"></span></div>
+          </div>
+          <div class="grid">
+            <div class="mini"><strong>12</strong><span>semnale verificate</span></div>
+            <div class="mini"><strong>4</strong><span>priorități recomandate</span></div>
+            <div class="mini"><strong>2 min</strong><span>review rapid</span></div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="panel section" aria-labelledby="features-title">
+        <h2 id="features-title">Ce verifică aplicația</h2>
+        <p class="lead">Structură, claritate, impact, cuvinte-cheie, linkuri, realizări cuantificate și semnale de credibilitate.</p>
+        <div class="features">
+          <article class="feature"><b>Scor automat</b><p>Estimare vizuală pentru structură, claritate și nivel de completare.</p></article>
+          <article class="feature"><b>Feedback pe priorități</b><p>Recomandări grupate pe impact: rapid, mediu și strategic.</p></article>
+          <article class="feature"><b>UX de dashboard</b><p>Interfață clară, responsive, potrivită pentru portofoliu și GitHub Pages.</p></article>
+        </div>
+      </section>
+
+      <section class="panel section" id="demo" aria-labelledby="demo-title">
+        <h2 id="demo-title">Demo interactiv</h2>
+        <p class="lead">Lipește un rezumat de CV. Scorul se actualizează local, fără backend.</p>
+        <div class="demo">
+          <textarea id="cvInput" aria-label="Text CV">Front-end CRM & Dashboard Developer. React, TypeScript, Vite, GitHub Pages. Am construit dashboard-uri CRM, aplicații gamificate și tool-uri de marketing. Experiență în CRM, campanii și UI/UX cu logică de produs.</textarea>
+          <div class="result" aria-live="polite">
+            <strong>Recomandări generate:</strong>
+            <ul id="tips"></ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>© Laura Andreea · CV Scout</span>
+      <span>Zero-cost static app · GitHub Pages ready</span>
+    </footer>
+  </div>
+
+  <script>
+    const input = document.getElementById('cvInput');
+    const scoreEl = document.getElementById('score');
+    const meter = document.getElementById('meter');
+    const tips = document.getElementById('tips');
+
+    function analyse(){
+      const text = input.value.toLowerCase();
+      let score = 48;
+      const checks = [
+        [/react|typescript|javascript|html|css|vite/, 10, 'Stack tehnic prezent: bun pentru screening rapid.'],
+        [/dashboard|crm|saas|workflow|automation/, 10, 'Poziționare de produs clară: păstrează exemplele concrete.'],
+        [/github|codepen|portfolio|live|repo/, 8, 'Dovezi publice menționate: adaugă linkuri vizibile.'],
+        [/\d+|%|\+/, 8, 'Ai cifre/indicatori: cuantifică impactul pentru fiecare proiect.'],
+        [/marketing|campanii|seo|analytics|growth/, 7, 'Background complementar valoros: leagă-l de rezultate front-end.'],
+        [/accessibility|accesibilitate|aria|responsive|mobile/, 7, 'Include accesibilitate/responsivitate ca avantaj practic.']
+      ];
+      const output = [];
+      checks.forEach(([regex, points, message]) => {
+        if(regex.test(text)){ score += points; output.push(message); }
+      });
+      if(text.length < 180) output.push('Extinde rezumatul: adaugă 2–3 proiecte, rolul tău și rezultatul livrat.');
+      if(!/\d+|%|\+/.test(text)) output.push('Adaugă metrici: număr proiecte, module, scor Lighthouse, utilizatori sau rezultate.');
+      if(!/github|codepen|portfolio|live|repo/.test(text)) output.push('Adaugă linkuri către portofoliu, GitHub și demo-uri live.');
+      if(output.length === 0) output.push('CV-ul are o bază bună. Următorul pas: rafinează headline-ul și ordinea proiectelor.');
+      score = Math.min(98, score);
+      scoreEl.textContent = score;
+      meter.style.width = score + '%';
+      tips.innerHTML = output.slice(0,5).map(item => `<li>${item}</li>`).join('');
+    }
+    input.addEventListener('input', analyse);
+    analyse();
+  </script>
+</body>
+</html>
